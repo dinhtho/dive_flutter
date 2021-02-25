@@ -28,9 +28,27 @@ class _UserItemState extends State<UserItem> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Jon Street",
-                  style: ThemeText.bold.copyWith(fontSize: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Jon Street",
+                      style: ThemeText.bold.copyWith(fontSize: 16),
+                    ),
+                    Text(
+                      "3 hrs ago",
+                      textAlign: TextAlign.end,
+                      style: ThemeText.bold.copyWith(color: Colors.grey),
+                    ),
+                    // Align(
+                    //   alignment: Alignment.center,
+                    //   child: Text(
+                    //     "3 hrs ago",
+                    //     textAlign: TextAlign.end,
+                    //     style: ThemeText.bold.copyWith(color: Colors.grey),
+                    //   ),
+                    // )
+                  ],
                 ),
                 Row(
                   children: [
