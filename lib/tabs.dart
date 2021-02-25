@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class FirstTab extends StatefulWidget {
-  String title;
-  MaterialColor color;
+  final String title;
+  final MaterialColor color;
 
   FirstTab({Key key, this.title, this.color}) : super(key: key);
 
@@ -18,9 +18,6 @@ class _FirstTabState extends State<FirstTab> with AutomaticKeepAliveClientMixin<
   @override
   void initState() {
     super.initState();
-    // Future.delayed(Duration(microseconds: 2000), () {
-    //   Fluttertoast.showToast(msg: widget.title);
-    // });
   }
 
   @override
