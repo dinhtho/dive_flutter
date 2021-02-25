@@ -1,4 +1,4 @@
-import 'package:example_app/tabs.dart';
+import 'package:example_app/user/UserTab.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +14,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'My Practices'),
+      home: Scaffold(
+          body: SafeArea(
+        child: MyHomePage(title: 'My Practices'),
+      )),
     );
   }
 }
@@ -28,10 +31,13 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView(
       children: [
-        FirstTab(title:"tab1",color: Colors.red,),
-        FirstTab(title:"tab2",color: Colors.green),
-        FirstTab(title:"tab3",color: Colors.blue),
-        FirstTab(title:"tab4",color: Colors.yellow)
+        UserTab(
+          title: "tab1",
+          color: Colors.red,
+        ),
+        UserTab(title: "tab2", color: Colors.green),
+        UserTab(title: "tab3", color: Colors.blue),
+        UserTab(title: "tab4", color: Colors.yellow)
       ],
     );
   }
