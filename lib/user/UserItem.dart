@@ -20,6 +20,7 @@ class _UserItemState extends State<UserItem> {
         mainAxisSize: MainAxisSize.max,
         children: [
           CircleAvatar(
+            backgroundColor: Colors.grey,
             radius: 30,
             backgroundImage: NetworkImage(
                 "https://464697-1455876-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2019/05/Vanja_Bertalan_Human_CEO_1-750x375.jpg"),
@@ -28,8 +29,6 @@ class _UserItemState extends State<UserItem> {
             child: Container(
               margin: EdgeInsets.only(left: 5),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
