@@ -11,15 +11,13 @@ class UserBloc {
   getUsers() {
     Network.request(
       call: UserService().getUsers(),
-      onLoading: (loading) => _userListStreamController.sink.add(loading),
+      onLoading: (loading) =>  _userListStreamController.sink.add(loading),
       onSuccess: (data) => _userListStreamController.sink.add(data),
       onError: (error) => _userListStreamController.sink.add(error),
     );
   }
 
-  dispose(){
+  dispose() {
     _userListStreamController.close();
   }
 }
-
-

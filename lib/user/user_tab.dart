@@ -4,6 +4,8 @@ import 'package:example_app/user/user_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:developer' as developer;
+import 'package:example_app/extension.dart';
 
 class UserTab extends StatefulWidget {
   final String title;
@@ -24,7 +26,7 @@ class _UserTabState extends State<UserTab>
   @override
   void initState() {
     super.initState();
-    userBloc.getUsers();
+    delay(500, () => {userBloc.getUsers()});
   }
 
   @override
@@ -54,9 +56,11 @@ class _UserTabState extends State<UserTab>
                 stream: userBloc.userListStream,
                 builder: (context, snapshot) {
                   final data = snapshot.data;
+                  developer.log("streamxxxx: " + data.toString());
                   if (data is bool) {
                     return Center(
-                        child: data ? CircularProgressIndicator() : Container());
+                        child:
+                            data ? CircularProgressIndicator() : Container());
                   } else if (data is UserListResponse) {
                     return ListView.builder(
                       itemCount: data.items.length,

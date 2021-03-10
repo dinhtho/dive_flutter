@@ -17,17 +17,17 @@ class Network {
       Function(T) onSuccess,
       Function(Exception) onError}) async {
     try {
-      onLoading(true);
+      onLoading?.call(true);
       T response = await call;
-      onLoading(false);
-      onSuccess(response);
+      onLoading?.call(false);
+      onSuccess?.call(response);
     } catch (e) {
       var error = e;
       if(e is Error){
         error = Exception(e.toString());
       }
-      onLoading(false);
-      onError(error);
+      onLoading?.call(false);
+      onError?.call(error);
     }
   }
 }
