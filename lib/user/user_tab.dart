@@ -26,7 +26,10 @@ class _UserTabState extends State<UserTab>
   @override
   void initState() {
     super.initState();
-    delay(500, () => {userBloc.getUsers()});
+    userBloc.userListStream.listen((event) {
+      developer.log("uuuuuuuu: "+event.toString());
+    });
+    userBloc.getUsers();
   }
 
   @override
@@ -78,6 +81,12 @@ class _UserTabState extends State<UserTab>
             ),
           ],
         ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    userBloc.dispose();
   }
 
   @override
