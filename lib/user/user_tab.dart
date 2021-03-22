@@ -22,14 +22,16 @@ class UserTab extends StatefulWidget {
 class _UserTabState extends State<UserTab>
     with AutomaticKeepAliveClientMixin<UserTab> {
   final userBloc = UserBloc();
+  int _currentPage = 1;
+  List<Items> _users = [];
 
   @override
   void initState() {
     super.initState();
-    userBloc.userListStream.listen((event) {
-      developer.log("uuuuuuuu: "+event.toString());
+    userBloc.errorStream.listen((event) {
+      Fluttertoast.showToast(msg: event.toString());
     });
-    userBloc.getUsers();
+    userBloc.getUsers(_currentPage);
   }
 
   @override
@@ -55,32 +57,38 @@ class _UserTabState extends State<UserTab>
             ),
             Expanded(
               child: StreamBuilder(
-                initialData: false,
                 stream: userBloc.userListStream,
-                builder: (context, snapshot) {
-                  final data = snapshot.data;
-                  developer.log("streamxxxx: " + data.toString());
-                  if (data is bool) {
-                    return Center(
-                        child:
-                            data ? CircularProgressIndicator() : Container());
-                  } else if (data is UserListResponse) {
+                builder: (context, AsyncSnapshot<UserListResponse> snapshot) {
+                  if (snapshot.hasData) {
+                    _users.addAll(snapshot.data.items);
                     return ListView.builder(
-                      itemCount: data.items.length,
+                      itemCount: snapshot.data.hasMore
+                          ? _users.length + 1
+                          : _users.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return UserItem(data.items[index]);
+                        if (index == _users.length) {
+                          _currentPage++;
+                          userBloc.getUsers(_currentPage);
+                          return _buildItemLoadMore();
+                        }
+                        return UserItem(_users[index]);
                       },
                     );
-                  } else if (data is Exception) {
-                    return Center(child: Text(data.toString()));
                   } else {
-                    throw Exception("Not found");
+                    return Center(child: CircularProgressIndicator());
                   }
                 },
               ),
             ),
           ],
         ));
+  }
+
+  _buildItemLoadMore() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20),
+      child: Center(child: CircularProgressIndicator()),
+    );
   }
 
   @override
