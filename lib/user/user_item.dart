@@ -25,7 +25,6 @@ class _UserItemState extends State<UserItem> {
           padding: EdgeInsets.only(top: 8, left: 5, bottom: 8, right: 5),
           margin: EdgeInsets.only(bottom: 10),
           child: Row(
-            mainAxisSize: MainAxisSize.max,
             children: [
               CircleAvatar(
                 backgroundColor: Colors.grey,

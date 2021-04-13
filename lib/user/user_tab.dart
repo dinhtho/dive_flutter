@@ -53,7 +53,6 @@ class _UserTabState extends State<UserTab>
                 ),
               ),
               height: 50,
-              width: double.infinity,
             ),
             Expanded(
               child: StreamBuilder(
